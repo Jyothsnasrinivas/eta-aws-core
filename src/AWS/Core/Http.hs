@@ -32,3 +32,12 @@ foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PUT
   hmnPUT :: HttpMethodName
 
 -- End com.amazonaws.http.HttpMethodName
+
+-- Start com.amazonaws.http.SdkHttpMetadata
+
+data {-# CLASS "com.amazonaws.http.SdkHttpMetadata" #-} SdkHttpMetadata = SdkHttpMetadata (Object# SdkHttpMetadata)
+  deriving Class
+
+foreign import java unsafe getHttpHeaders :: Java SdkHttpMetadata (Map JString JString)
+
+foreign import java unsafe getHttpStatusCode :: Java SdkHttpMetadata Int
