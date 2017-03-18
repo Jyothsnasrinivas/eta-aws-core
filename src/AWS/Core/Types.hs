@@ -87,3 +87,19 @@ foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.POS
 
 foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PUT"
   hmnPUT :: HttpMethodName
+
+-- End com.amazonaws.http.HttpMethodName
+
+-- Start com.amazonaws.http.HttpMethodName
+
+data {-# CLASS "com.amazonaws.http.SignableRequest" #-} SignableRequest t = SignableRequest (Object# SignableRequest t)
+  deriving Class
+
+foreign import java unsafe "@interface addHeader" addHeader :: (t <: Object, a <: SignableRequest t)
+  => String -> String -> Java a ()
+
+foreign import java unsafe "@interface addParameter" addParameter :: (t <: Object, a <: SignableRequest t)
+  => String -> String -> Java a ()
+
+foreign import java unsafe "@interface setContent" setContent :: (t <: Object, a <: SignableRequest t)
+  => InputStream Java a ()
