@@ -41,3 +41,5 @@ data {-# CLASS "com.amazonaws.http.SdkHttpMetadata" #-} SdkHttpMetadata = SdkHtt
 foreign import java unsafe getHttpHeaders :: Java SdkHttpMetadata (Map JString JString)
 
 foreign import java unsafe getHttpStatusCode :: Java SdkHttpMetadata Int
+
+-- End com.amazonaws.http.SdkHttpMetadata
