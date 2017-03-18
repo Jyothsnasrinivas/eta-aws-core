@@ -215,3 +215,47 @@ data {-# CLASS "com.amazonaws.RequestClientOptions$Marker" #-} RequestClientOpti
 foreign import java unsafe "@static @field java.math.RequestClientOptions$Marker.USER_AGENT" rcoUSER_AGENT :: RequestClientOptionsMarker
 
 -- End com.amazonaws.RequestClientOptions.Marker
+
+-- Start com.amazonaws.AmazonWebServiceClient
+
+data {-# CLASS "com.amazonaws.AmazonWebServiceClient" #-} AmazonWebServiceClient = AmazonWebServiceClient (Object# AmazonWebServiceClient)
+  deriving Class
+
+foreign import java unsafe addRequestHandler :: (b <: AmazonWebServiceClient)
+  => RequestHandler -> Java b ()
+
+foreign import java unsafe "addRequestHandler" addRequestHandler2 :: (b <: AmazonWebServiceClient)
+  => RequestHandler2 -> Java b ()
+
+foreign import java unsafe configureRegion :: (b <: AmazonWebServiceClient)
+  => Regions -> Java b ()
+
+foreign import java unsafe getEndpointPrefix :: (b <: AmazonWebServiceClient) => Java b String
+
+foreign import java unsafe getRequestMetricsCollector :: (b <: AmazonWebServiceClient) => Java b RequestMetricCollector
+
+foreign import java unsafe getServiceName :: (b <: AmazonWebServiceClient) => Java b String
+
+foreign import java unsafe getSignerByURI :: (b <: AmazonWebServiceClient) => URI -> Java b Signer
+
+foreign import java unsafe getSignerRegionOverride :: (b <: AmazonWebServiceClient) => Java b String
+
+foreign import java unsafe getTimeOffset :: (b <: AmazonWebServiceClient) => Java b Int
+
+foreign import java unsafe makeImmutable :: (b <: AmazonWebServiceClient) => Java b ()
+
+foreign import java unsafe setServiceNameIntern :: (b <: AmazonWebServiceClient)
+  => String -> Java b ()
+
+foreign import java unsafe setSignerRegionOverride :: (b <: AmazonWebServiceClient)
+  => String -> Java b ()
+
+foreign import java unsafe setTimeOffset :: (b <: AmazonWebServiceClient)
+  => Int -> Java b ()
+
+foreign import java unsafe shutdown :: (b <: AmazonWebServiceClient) => Java b ()
+
+foreign import java unsafe withTimeOffset :: (b <: AmazonWebServiceClient)
+  => Int -> Java b AmazonWebServiceClient
+
+-- End java.amazonaws.AmazonWebServiceClient
