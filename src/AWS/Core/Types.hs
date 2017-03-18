@@ -126,7 +126,7 @@ foreign import java unsafe "@interface addHandlerContext"
     HandlerContextKey x -> Java a x
 
 foreign import java unsafe "@interface getOriginalRequest"
-  getOriginalRequest :: (t <: Object, a <: Request t) => Java a AWSWebServiceRequest
+  getOriginalRequest :: (t <: Object, a <: Request t) => Java a AmazonWebServiceRequest
 
 foreign import java unsafe "@interface getServiceName"
   getServiceName :: (t <: Object, a <: Request t) => Java a String
@@ -163,3 +163,14 @@ data {-# CLASS "com.amazonaws.handlers.HandlerContextKey" #-} HandlerContextKey 
   deriving Class
 
 -- End com.amazonaws.handlers.HandlerContextKey
+
+-- Start com.amazonaws.AmazonWebServiceRequest
+
+data {-# CLASS "com.amazonaws.AmazonWebServiceRequest" #-} AmazonWebServiceRequest  = AmazonWebServiceRequest (Object# AmazonWebServiceRequest)
+  deriving Class
+
+foreign import java unsafe clone :: Java AmazonWebServiceRequest AmazonWebServiceRequest
+
+foreign import java unsafe getCloneRoot :: Java AmazonWebServiceRequest AmazonWebServiceRequest
+
+foreign import java unsafe getCloneSource :: Java AmazonWebServiceRequest AmazonWebServiceRequest
