@@ -184,3 +184,43 @@ foreign import java unsafe getGeneralProgressListener :: Java AmazonWebServiceRe
 foreign import java unsafe getReadLimit :: Java AmazonWebServiceRequest Int
 
 foreign import java unsafe getRequestClientOptions :: Java AmazonWebServiceRequest RequestClientOptions
+
+foreign import java unsafe getRequestCredentials :: Java AmazonWebServiceRequest AWSCredentials
+
+foreign import java unsafe getRequestCredentialsProvider :: Java AmazonWebServiceRequest AWSCredentialsProvider
+
+foreign import java unsafe getRequestMetricCollector :: Java AmazonWebServiceRequest RequestMetricCollector
+
+foreign import java unsafe getSdkRequestTimeout :: Java AmazonWebServiceRequest JInteger
+
+foreign import java unsafe getSdkClientExecutionTimeout :: Java AmazonWebServiceRequest JInteger
+
+foreign import java unsafe putCustomQueryParameter :: String -> String -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe putCustomRequestHeader :: String -> String -> Java AmazonWebServiceRequest String
+
+foreign import java unsafe setGeneralProgressListener :: ProgressListener -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe setRequestCredentials :: AWSCredentials -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe setRequestCredentialsProvider :: AWSCredentialsProvider -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe setRequestMetricCollector :: RequestMetricCollector -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe setSdkClientExecutionTimeout :: Int -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe setSdkRequestTimeout :: Int -> Java AmazonWebServiceRequest ()
+
+foreign import java unsafe withGeneralProgressListener :: (t <: AmazonWebServiceRequest)
+  => ProgressListener -> Java AmazonWebServiceRequest t
+
+foreign import java unsafe withRequestMetricCollector :: (t <: AmazonWebServiceRequest)
+  => RequestMetricCollector -> Java AmazonWebServiceRequest t
+
+foreign import java unsafe withSdkClientExecutionTimeout :: (t <: AmazonWebServiceRequest)
+  => Int -> Java AmazonWebServiceRequest t
+
+foreign import java unsafe withSdkRequestTimeout :: (t <: AmazonWebServiceRequest)
+  => Int -> Java AmazonWebServiceRequest t
+
+-- End com.amazonaws.AmazonWebServiceRequest
