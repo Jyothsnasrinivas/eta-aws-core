@@ -174,3 +174,13 @@ foreign import java unsafe clone :: Java AmazonWebServiceRequest AmazonWebServic
 foreign import java unsafe getCloneRoot :: Java AmazonWebServiceRequest AmazonWebServiceRequest
 
 foreign import java unsafe getCloneSource :: Java AmazonWebServiceRequest AmazonWebServiceRequest
+
+foreign import java unsafe getCustomQueryParameters :: Java AmazonWebServiceRequest (Map JString (List JString))
+
+foreign import java unsafe getCustomRequestHeaders :: Java AmazonWebServiceRequest (Map JString JString)
+
+foreign import java unsafe getGeneralProgressListener :: Java AmazonWebServiceRequest ProgressListener
+
+foreign import java unsafe getReadLimit :: Java AmazonWebServiceRequest Int
+
+foreign import java unsafe getRequestClientOptions :: Java AmazonWebServiceRequest RequestClientOptions
