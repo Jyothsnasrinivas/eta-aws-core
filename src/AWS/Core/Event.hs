@@ -26,3 +26,10 @@ foreign import java unsafe getBytesTransferred :: Java ProgressEvent Int64
 foreign import java unsafe getEventType :: Java ProgressEvent ProgressEventType
 
 -- End com.amazonaws.event.ProgressEvent
+
+-- Start com.amazonaws.event.ProgressEventType
+
+data {-# CLASS "com.amazonaws.ProgressEventType" #-} ProgressEventType = ProgressEventType (Object# ProgressEventType)
+  deriving Class
+
+-- End com.amazonaws.event.ProgressEventType
