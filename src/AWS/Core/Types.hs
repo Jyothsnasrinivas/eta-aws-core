@@ -154,3 +154,12 @@ foreign import java unsafe "@interface withParameter"
 
 foreign import java unsafe "@interface withTimeOffset"
   withTimeOffset :: (t <: Object, a <: Request t) => Int -> Java a (Request t)
+
+-- End com.amazonaws.Request
+
+-- Start com.amazonaws.handlers.HandlerContextKey
+
+data {-# CLASS "com.amazonaws.handlers.HandlerContextKey" #-} HandlerContextKey t = HandlerContextKey (Object# (HandlerContextKey t))
+  deriving Class
+
+-- End com.amazonaws.handlers.HandlerContextKey
