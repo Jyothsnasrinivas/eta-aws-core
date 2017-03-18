@@ -62,34 +62,6 @@ data {-# CLASS "com.amazonaws.ReadLimitInfo" #-} ReadLimitInfo = ReadLimitInfo (
 
 foreign import java unsafe getReadLimit :: Java ReadLimitInfo Int
 
--- Start com.amazonaws.http.HttpMethodName
-
-data {-# CLASS "com.amazonaws.http.HttpMethodName" #-} HttpMethodName = HttpMethodName (Object# HttpMethodName)
-  deriving Class
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.DELETE"
-  hmnDELETE :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.GET"
-  hmnGET :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.HEAD"
-  hmnHEAD :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.OPTIONS"
-  hmnOPTIONS :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PATCH"
-  hmnPATCH :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.POST"
-  hmnPOST :: HttpMethodName
-
-foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PUT"
-  hmnPUT :: HttpMethodName
-
--- End com.amazonaws.http.HttpMethodName
-
 -- Start com.amazonaws.SignableRequest
 
 data {-# CLASS "com.amazonaws.SignableRequest" #-} SignableRequest t = SignableRequest (Object# (SignableRequest t))
@@ -157,13 +129,6 @@ foreign import java unsafe "@interface withTimeOffset"
 
 -- End com.amazonaws.Request
 
--- Start com.amazonaws.handlers.HandlerContextKey
-
-data {-# CLASS "com.amazonaws.handlers.HandlerContextKey" #-} HandlerContextKey t = HandlerContextKey (Object# (HandlerContextKey t))
-  deriving Class
-
--- End com.amazonaws.handlers.HandlerContextKey
-
 -- Start com.amazonaws.AmazonWebServiceRequest
 
 data {-# CLASS "com.amazonaws.AmazonWebServiceRequest" #-} AmazonWebServiceRequest  = AmazonWebServiceRequest (Object# AmazonWebServiceRequest)
@@ -224,3 +189,29 @@ foreign import java unsafe withSdkRequestTimeout :: (t <: AmazonWebServiceReques
   => Int -> Java AmazonWebServiceRequest t
 
 -- End com.amazonaws.AmazonWebServiceRequest
+
+-- Start com.amazonaws.RequestClientOptions
+
+data {-# CLASS "com.amazonaws.RequestClientOptions" #-} RequestClientOptions = RequestClientOptions (Object# RequestClientOptions)
+  deriving Class
+
+foreign import java unsafe appendUserAgent :: String -> Java RequestClientOptions ()
+
+foreign import java unsafe getClientMarker :: RequestClientOptions.Marker -> Java RequestClientOptions String
+
+foreign import java unsafe "getReadLimit" getReadLimitRCO :: Java RequestClientOptions Int
+
+foreign import java unsafe putClientMarker :: RequestClientOptions.Marker -> String -> Java RequestClientOptions ()
+
+foreign import java unsafe setReadLimit :: Int -> Java RequestClientOptions ()
+
+-- End com.amazonaws.RequestClientOptions
+
+-- Start com.amazonaws.RequestClientOptions.Marker
+
+data {-# CLASS "com.amazonaws.RequestClientOptions$Marker" #-} RequestClientOptionsMarker = RequestClientOptionsMarker (Object# RequestClientOptionsMarker)
+  deriving Class
+
+foreign import java unsafe "@static @field java.math.RequestClientOptions$Marker.USER_AGENT" rcoUSER_AGENT :: RequestClientOptionsMarker
+
+-- End com.amazonaws.RequestClientOptions.Marker
