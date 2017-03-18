@@ -18,7 +18,7 @@ data {-# CLASS "com.amazonaws.handlers.RequestHandler" #-} RequestHandler = Requ
   deriving Class
 
 foreign import java unsafe "@interface afterError"
-  afterError :: Request b -> Exection -> Java RequestHandler ()
+  afterError :: Request b -> Exception -> Java RequestHandler ()
 
 foreign import java unsafe "@interface afterResponse"
   afterResponse :: Request b -> Object -> TimingInfo -> Java RequestHandler ()
