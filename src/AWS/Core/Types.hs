@@ -258,4 +258,54 @@ foreign import java unsafe shutdown :: (b <: AmazonWebServiceClient) => Java b (
 foreign import java unsafe withTimeOffset :: (b <: AmazonWebServiceClient)
   => Int -> Java b AmazonWebServiceClient
 
--- End java.amazonaws.AmazonWebServiceClient
+-- End com.amazonaws.AmazonWebServiceClient
+
+-- Start java.lang.Exception
+
+data {-# CLASS "java.lang.Exception" #-} Exception = Exception (Object# Exception)
+  deriving Class
+
+-- End java.lang.Exception
+
+-- Start com.amazonaws.AmazonWebServiceResponse
+
+data {-# CLASS "com.amazonaws.AmazonWebServiceResponse" #-} AmazonWebServiceResponse t = AmazonWebServiceResponse (Object# (AmazonWebServiceResponse t))
+  deriving Class
+
+foreign import java unsafe getRequestId :: (t <: Object) => Java (AmazonWebServiceResponse t) String
+
+foreign import java unsafe getResponseMetadata :: (t <: Object) => Java (AmazonWebServiceResponse t) ResponseMetadata
+
+foreign import java unsafe getResult :: (t <: Object) => Java (AmazonWebServiceResponse t) t
+
+foreign import java unsafe setResponseMetadata :: (t <: Object) => ResponseMetadata -> Java (AmazonWebServiceResponse t) ()
+
+foreign import java unsafe setResult :: (t <: Object) => t -> Java (AmazonWebServiceResponse t) ()
+
+-- End com.amazonaws.AmazonWebServiceResponse
+
+-- Start com.amazonaws.ResponseMetadata
+
+data {-# CLASS "com.amazonaws.ResponseMetadata" #-} ResponseMetadata = ResponseMetadata (Object# ResponseMetadata)
+  deriving Class
+
+-- End com.amazonaws.ResponseMetadata
+
+-- Start com.amazonaws.AmazonWebServiceResult
+
+data {-# CLASS "com.amazonaws.AmazonWebServiceResult" #-} AmazonWebServiceResult t = AmazonWebServiceResult (Object# (AmazonWebServiceResult t))
+  deriving Class
+
+foreign import java unsafe getSdkHttpMetadata :: (t <: ResponseMetadata)
+  => Java (AmazonWebServiceResult t) SdkHttpMetadata
+
+foreign import java unsafe getSdkResponseMetadata :: (t <: ResponseMetadata)
+  => Java (AmazonWebServiceResult t) t
+
+foreign import java unsafe setSdkHttpMetadata :: (t <: ResponseMetadata)
+  => SdkHttpMetadata -> Java (AmazonWebServiceResult t) (AmazonWebServiceResult t)
+
+foreign import java unsafe setSdkResponseMetadata :: (t <: ResponseMetadata)
+  => t -> Java (AmazonWebServiceResult t) (AmazonWebServiceResult t)
+
+-- End com.amazonaws.AmazonWebServiceResult
