@@ -341,3 +341,41 @@ foreign import java unsafe getConnectionMaxIdleMillis :: Java ClientConfiguratio
 foreign import java unsafe getConnectionTimeout :: Java ClientConfiguration Int
 
 foreign import java unsafe getConnectionTTL :: Java ClientConfiguration Int64
+
+foreign import java unsafe getDnsResolver :: Java ClientConfiguration DnsResolver
+
+foreign import java unsafe "getHeaders" getHeadersCC :: Java ClientConfiguration (Map JString JString)
+
+foreign import java unsafe getLocalAddress :: Java ClientConfiguration InetAddress
+
+foreign import java unsafe getMaxConnections :: Java ClientConfiguration Int
+
+foreign import java unsafe getMaxConsecutiveRetriesBeforeThrottling :: Java ClientConfiguration Int
+
+foreign import java unsafe getMaxErrorRetry :: Java ClientConfiguration Int
+
+foreign import java unsafe getMaxErrorRetry :: Java ClientConfiguration Int
+
+foreign import java unsafe getNonProxyHosts :: Java ClientConfiguration String
+
+foreign import java unsafe getProtocol :: Java ClientConfiguration Protocol
+
+foreign import java unsafe getProxyDomain :: Java ClientConfiguration String
+
+foreign import java unsafe getProxyHost :: Java ClientConfiguration String
+
+foreign import java unsafe getProxyPassword :: Java ClientConfiguration String
+
+foreign import java unsafe getProxyPort :: Java ClientConfiguration Int
+
+foreign import java unsafe getProxyUsername :: Java ClientConfiguration String
+
+foreign import java unsafe getProxyWorkstation :: Java ClientConfiguration String
+
+foreign import java unsafe getRequestTimeout :: Java ClientConfiguration Int
+
+foreign import java unsafe getResponseMetadataCacheSize :: Java ClientConfiguration Int
+
+foreign import java unsafe getRetryPolicy :: Java ClientConfiguration RetryPolicy
+
+foreign import java unsafe getSecureRandom :: Java ClientConfiguration SecureRandom
