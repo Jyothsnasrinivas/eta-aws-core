@@ -322,3 +322,22 @@ foreign import java unsafe setSslSocketFactory :: ConnectionSocketFactory ->  Ja
 foreign import java unsafe withSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ApacheHttClientConfig
 
 -- End com.amazonaws.ApacheHttClientConfig
+
+-- Start com.amazonaws.ClientConfiguration
+
+data {-# CLASS "com.amazonaws.ClientConfiguration" #-} ClientConfiguration = ClientConfiguration (Object# ClientConfiguration)
+  deriving Class
+
+foreign import java unsafe "addHeader" addHeaderCC :: String -> String -> Java ClientConfiguration ()
+
+foreign import java unsafe getApacheHttpClientConfig :: Java ClientConfiguration ApacheHttClientConfig
+
+foreign import java unsafe getCacheResponseMetadata :: Java ClientConfiguration Bool
+
+foreign import java unsafe getClientExecutionTimeout :: Java ClientConfiguration Int
+
+foreign import java unsafe getConnectionMaxIdleMillis :: Java ClientConfiguration Int64
+
+foreign import java unsafe getConnectionTimeout :: Java ClientConfiguration Int
+
+foreign import java unsafe getConnectionTTL :: Java ClientConfiguration Int64
