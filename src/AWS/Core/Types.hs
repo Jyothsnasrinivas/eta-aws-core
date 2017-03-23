@@ -309,3 +309,16 @@ foreign import java unsafe setSdkResponseMetadata :: (t <: ResponseMetadata)
   => t -> Java (AmazonWebServiceResult t) (AmazonWebServiceResult t)
 
 -- End com.amazonaws.AmazonWebServiceResult
+
+-- Start com.amazonaws.ApacheHttClientConfig
+
+data {-# CLASS "com.amazonaws.ApacheHttClientConfig" #-} ApacheHttClientConfig = ApacheHttClientConfig (Object# ApacheHttClientConfig)
+  deriving Class
+
+foreign import java unsafe getSslSocketFactory :: Java ApacheHttClientConfig ConnectionSocketFactory
+
+foreign import java unsafe setSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ()
+
+foreign import java unsafe withSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ApacheHttClientConfig
+
+-- End com.amazonaws.ApacheHttClientConfig
