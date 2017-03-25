@@ -3,6 +3,7 @@ module AWS.Core.Types where
 import Java
 import Java.IO
 import Java.Net
+import Java.Security
 
 -- Start com.amazonaws.DnsResolver
 
@@ -379,3 +380,203 @@ foreign import java unsafe getResponseMetadataCacheSize :: Java ClientConfigurat
 foreign import java unsafe getRetryPolicy :: Java ClientConfiguration RetryPolicy
 
 foreign import java unsafe getSecureRandom :: Java ClientConfiguration SecureRandom
+
+foreign import java unsafe getSignerOverride :: Java ClientConfiguration String
+
+foreign import java unsafe getSocketBufferSizeHints :: Java ClientConfiguration JIntArray
+
+foreign import java unsafe getSocketTimeout :: Java ClientConfiguration Int
+
+foreign import java unsafe getUserAgentPrefix :: Java ClientConfiguration String
+
+foreign import java unsafe getUserAgentSuffix :: Java ClientConfiguration String
+
+foreign import java unsafe getValidateAfterInactivityMillis :: Java ClientConfiguration Int
+
+foreign import java unsafe isPreemptiveBasicProxyAuth :: Java ClientConfiguration Bool
+
+foreign import java unsafe isUseExpectContinue :: Java ClientConfiguration Bool
+
+foreign import java unsafe setCacheResponseMetadata :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setClientExecutionTimeout :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setConnectionMaxIdleMillis :: Int64 -> Java ClientConfiguration ()
+
+foreign import java unsafe setConnectionTimeout :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setConnectionTTL :: Int64 -> Java ClientConfiguration ()
+
+foreign import java unsafe setDnsResolver :: DnsResolver -> Java ClientConfiguration ()
+
+foreign import java unsafe setLocalAddress :: InetAddress -> Java ClientConfiguration ()
+
+foreign import java unsafe setMaxConnections :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setMaxConsecutiveRetriesBeforeThrottling ::
+  Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setMaxErrorRetry :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setNonProxyHosts :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setPreemptiveBasicProxyAuth :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setNonProxyHosts :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setProtocol :: Protocol -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyDomain :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyHost :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyPassword :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyPort :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyUsername :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setProxyWorkstation :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setRequestTimeout :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setResponseMetadataCacheSize :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setRetryPolicy :: RetryPolicy -> Java ClientConfiguration ()
+
+foreign import java unsafe setSecureRandom :: SecureRandom -> Java ClientConfiguration ()
+
+foreign import java unsafe setSignerOverride :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setSocketBufferSizeHints :: Int -> Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setSocketTimeout :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe setUseExpectContinue :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setUseGzip :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setUserAgentPrefix :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setUserAgentSuffix :: String -> Java ClientConfiguration ()
+
+foreign import java unsafe setUseReaper :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setUseTcpKeepAlive :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setUseThrottleRetries :: Bool -> Java ClientConfiguration ()
+
+foreign import java unsafe setValidateAfterInactivityMillis :: Int -> Java ClientConfiguration ()
+
+foreign import java unsafe useGzip :: Java ClientConfiguration Bool
+
+foreign import java unsafe useReaper :: Java ClientConfiguration Bool
+
+foreign import java unsafe useTcpKeepAlive :: Java ClientConfiguration Bool
+
+foreign import java unsafe useThrottledRetries :: Java ClientConfiguration Bool
+
+foreign import java unsafe withCacheResponseMetadata ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withClientExecutionTimeout ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withConnectionMaxIdleMillis ::
+  Int64 -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withConnectionTimeout ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withConnectionTTL ::
+  Int64 -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withDnsResolver ::
+  DnsResolver -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withGzip ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withHeader ::
+  String -> String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withLocalAddress ::
+  InetAddress -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withMaxConnections ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withMaxConsecutiveRetriesBeforeThrottling ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withMaxErrorRetry ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withNonProxyHosts ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withPreemptiveBasicProxyAuth ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProtocol ::
+  Protocol -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyDomain ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyHost ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyPassword ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyPort ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyUsername ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withProxyWorkstation ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withReaper ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withRequestTimeout ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withResponseMetadataCacheSize ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withRetryPolicy ::
+  RetryPolicy -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withSecureRandom ::
+  SecureRandom -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withSignerOverride ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withSocketBufferSizeHints ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withSocketTimeout ::
+  Int -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withTcpKeepAlive ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withThrottledRetries ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withUseExpectContinue ::
+  Bool -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withUserAgentPrefix ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withUserAgentSuffix ::
+  String -> Java ClientConfiguration ClientConfiguration
+
+foreign import java unsafe withValidateAfterInactivityMillis ::
+  Int -> Java ClientConfiguration ClientConfiguration
