@@ -593,3 +593,12 @@ foreign import java unsafe "@static @field com.amazonaws.Protocol.HTTP" mkHTTP :
 foreign import java unsafe "@static @field com.amazonaws.Protocol.HTTPS" mkHTTPS :: Protocol
 
 -- End com.amazonaws.Protocol
+
+-- Start com.amazonaws.ClientConfigurationFactory
+
+data {-# CLASS "com.amazonaws.ClientConfigurationFactory" #-} ClientConfigurationFactory = ClientConfigurationFactory (Object# ClientConfigurationFactory)
+  deriving Class
+
+foreign import java unsafe getConfig :: (b <: ClientConfigurationFactory) => Java b ClientConfiguration
+
+-- End com.amazonaws.ClientConfigurationFactory
