@@ -582,3 +582,14 @@ foreign import java unsafe withValidateAfterInactivityMillis ::
   Int -> Java ClientConfiguration ClientConfiguration
 
 -- End com.amazonaws.ClientConfiguration
+
+-- Start com.amazonaws.Protocol
+
+data {-# CLASS "com.amazonaws.Protocol" #-} Protocol = Protocol (Object# Protocol)
+  deriving Class
+
+foreign import java unsafe "@static @field com.amazonaws.Protocol.HTTP" mkHTTP :: Protocol
+
+foreign import java unsafe "@static @field com.amazonaws.Protocol.HTTPS" mkHTTPS :: Protocol
+
+-- End com.amazonaws.Protocol
