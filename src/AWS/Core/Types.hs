@@ -580,3 +580,5 @@ foreign import java unsafe withUserAgentSuffix ::
 
 foreign import java unsafe withValidateAfterInactivityMillis ::
   Int -> Java ClientConfiguration ClientConfiguration
+
+-- End com.amazonaws.ClientConfiguration
