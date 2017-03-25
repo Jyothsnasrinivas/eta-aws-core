@@ -25,4 +25,17 @@ foreign import java unsafe isMaxErrorRetryInClientConfigHonored :: Java RetryPol
 data {-# CLASS "com.amazonaws.retry.RetryPolicy$BackoffStrategy" #-} BackoffStrategy = BackoffStrategy (Object# BackoffStrategy)
   deriving Class
 
-foreign import java unsafe "@interface" delayBeforeNextRetry :: Java BackoffStrategy Int64
+foreign import java unsafe "@interface"
+  delayBeforeNextRetry :: AmazonWebServiceRequest -> AmazonClientException -> Java BackoffStrategy Int64
+
+-- End com.amazonaws.retry.RetryPolicy.BackoffStrategy
+
+-- Start com.amazonaws.retry.RetryPolicy.RetryCondition
+
+data {-# CLASS "com.amazonaws.retry.RetryPolicy$RetryCondition" #-} RetryCondition = RetryCondition (Object# RetryCondition)
+  deriving Class
+
+foreign import java unsafe "@interface"
+  shouldRetry :: AmazonWebServiceRequest -> AmazonClientException -> Java RetryCondition Bool
+
+-- End com.amazonaws.retry.RetryPolicy.RetryCondition
