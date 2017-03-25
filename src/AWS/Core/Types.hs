@@ -602,3 +602,47 @@ data {-# CLASS "com.amazonaws.ClientConfigurationFactory" #-} ClientConfiguratio
 foreign import java unsafe getConfig :: (b <: ClientConfigurationFactory) => Java b ClientConfiguration
 
 -- End com.amazonaws.ClientConfigurationFactory
+
+-- Start com.amazonaws.DefaultRequest
+
+data {-# CLASS "com.amazonaws.DefaultRequest" #-} DefaultRequest t = DefaultRequest (Object# DefaultRequest t)
+  deriving Class
+
+foreign import java unsafe
+  addHandlerContext :: (t <: Object, x <: Object) => HandlerContextKey -> Java DefaultRequest ()
+
+foreign import java unsafe "addHeader"
+  addHeaderDR :: (t <: Object) => String -> String -> Java DefaultRequest ()
+
+foreign import java unsafe "addParameter"
+  addParameterDR :: (t <: Object) => String -> String -> Java DefaultRequest ()
+
+foreign import java unsafe "addParameters"
+  addParametersDR :: (t <: Object) => String -> List String -> Java DefaultRequest ()
+
+foreign import java unsafe "getAWSRequestMetrics"
+  getAWSRequestMetricsDR :: (t <: Object) => Java DefaultRequest AWSRequestMetrics
+
+foreign import java unsafe "getContent"
+  getContentDR :: (t <: Object) => Java DefaultRequest InputStream
+
+foreign import java unsafe "getContentUnwrapped"
+  getContentUnwrappedDR :: (t <: Object) => Java DefaultRequest InputStream
+
+foreign import java unsafe "getEndpoint"
+  getEndpointDR :: (t <: Object) => Java DefaultRequest URI
+
+foreign import java unsafe "getHeaders"
+  getHeadersDR :: (t <: Object) => Java DefaultRequest (Map JString JString)
+
+foreign import java unsafe "getHttpMethod"
+  getHttpMethodDR :: (t <: Object) => Java DefaultRequest HttpMethodName
+
+foreign import java unsafe "getOriginalRequest"
+  getOriginalRequestDR :: (t <: Object) => Java DefaultRequest AmazonWebServiceRequest
+
+foreign import java unsafe "getOriginalRequestObject"
+  getOriginalRequestObjectDR :: (t <: Object) => Java DefaultRequest Object
+
+foreign import java unsafe "getParameters"
+  getParametersDR :: (t <: Object) => Java DefaultRequest (Map JString (List JString))
