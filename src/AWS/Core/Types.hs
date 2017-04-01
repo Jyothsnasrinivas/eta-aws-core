@@ -646,3 +646,39 @@ foreign import java unsafe "getOriginalRequestObject"
 
 foreign import java unsafe "getParameters"
   getParametersDR :: (t <: Object) => Java DefaultRequest (Map JString (List JString))
+
+-- End com.amazonaws.DefaultRequest
+
+-- Start com.amazonaws.PredefinedClientConfigurations
+
+data {-# CLASS "com.amazonaws.PredefinedClientConfigurations" #-} PredefinedClientConfigurations = PredefinedClientConfigurations (Object# PredefinedClientConfigurations)
+  deriving Class
+
+-- End com.amazonaws.PredefinedClientConfigurations
+
+-- Start com.amazonaws.RequestConfig
+
+data {-# CLASS "com.amazonaws.RequestConfig" #-} RequestConfig = RequestConfig (Object# RequestConfig)
+  deriving Class
+
+foreign import java unsafe getClientExecutionTimeout :: Java RequestConfig JInteger
+
+foreign import java unsafe getCredentialsProvider :: Java RequestConfig AWSCredentialsProvider
+
+foreign import java unsafe getCustomQueryParameters :: Java RequestConfig (Map JString (List JString))
+
+foreign import java unsafe getCustomRequestHeaders :: Java RequestConfig (Map JString JString)
+
+foreign import java unsafe getOriginalRequest :: Java RequestConfig Object
+
+foreign import java unsafe getProgressListener :: Java RequestConfig ProgressListener
+
+foreign import java unsafe getRequestClientOptions :: Java RequestConfig RequestClientOptions
+
+foreign import java unsafe getRequestMetricsCollector :: Java RequestConfig RequestMetricCollector
+
+foreign import java unsafe getRequestTimeout :: Java RequestConfig JInteger
+
+foreign import java unsafe getRequestType :: Java RequestConfig JString
+
+-- End com.amazonaws.RequestConfig
