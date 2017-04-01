@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds, TypeFamilies #-}
 module AWS.Core.Types where
 
 import Java
@@ -25,34 +26,34 @@ data {-# CLASS "com.amazonaws.ImmutableRequest" #-} ImmutableRequest t = Immutab
   deriving Class
 
 foreign import java unsafe "@interface getContent" getContent :: (t <: Object)
-  => Java (ImmutableRequest t) InputStream
+  => ImmutableRequest t -> InputStream
 
 foreign import java unsafe "@interface getContentUnwrapped" getContentUnwrapped :: (t <: Object)
-  => Java (ImmutableRequest t) InputStream
+  => ImmutableRequest t -> InputStream
 
 -- foreign import java unsafe "@interface getEndpoint" getEndpoint :: (t <: Object)
---   => Java (ImmutableRequest t) URI
+--   => ImmutableRequest t -> URI
 
 foreign import java unsafe "@interface getHeaders" getHeaders :: (t <: Object)
-  => Java (ImmutableRequest t) (Map JString JString)
+  => ImmutableRequest t ->  (Map JString JString)
 
 foreign import java unsafe "@interface getHttpMethod" getHttpMethod :: (t <: Object)
-  => Java (ImmutableRequest t) HttpMethodName
+  => ImmutableRequest t -> HttpMethodName
 
 foreign import java unsafe "@interface getOriginalRequestObject" getOriginalRequestObject :: (t <: Object)
-  => Java (ImmutableRequest t) Object
+  => ImmutableRequest t -> Object
 
 foreign import java unsafe "@interface getParameters" getParameters :: (t <: Object)
-  => Java (ImmutableRequest t) (Map JString (List JString))
+  => ImmutableRequest t -> (Map JString (List JString))
 
 foreign import java unsafe "@interface getReadLimitInfo" getReadLimitInfo :: (t <: Object)
-  => Java (ImmutableRequest t) ReadLimitInfo
+  => ImmutableRequest t -> ReadLimitInfo
 
 foreign import java unsafe "@interface getResourcePath" getResourcePath :: (t <: Object)
-  => Java (ImmutableRequest t) String
+  => ImmutableRequest t -> String
 
 foreign import java unsafe "@interface getTimeOffset" getTimeOffset :: (t <: Object)
-  => Java (ImmutableRequest t) Int
+  => ImmutableRequest t -> Int
 
 -- End com.amazonaws.ImmutableRequest
 
@@ -61,7 +62,7 @@ foreign import java unsafe "@interface getTimeOffset" getTimeOffset :: (t <: Obj
 data {-# CLASS "com.amazonaws.ReadLimitInfo" #-} ReadLimitInfo = ReadLimitInfo (Object# ReadLimitInfo)
   deriving Class
 
-foreign import java unsafe getReadLimit :: Java ReadLimitInfo Int
+foreign import java unsafe getReadLimit :: (a <: ReadLimitInfo) => Java a Int
 
 -- Start com.amazonaws.SignableRequest
 
@@ -75,7 +76,7 @@ foreign import java unsafe "@interface addParameter" addParameter :: (t <: Objec
   => String -> String -> Java a ()
 
 foreign import java unsafe "@interface setContent" setContent :: (t <: Object, a <: SignableRequest t)
-  => InputStream Java a ()
+  => InputStream -> Java a ()
 
 -- End com.amazonaws.SignableRequest
 
@@ -135,6 +136,8 @@ foreign import java unsafe "@interface withTimeOffset"
 data {-# CLASS "com.amazonaws.AmazonWebServiceRequest" #-} AmazonWebServiceRequest  = AmazonWebServiceRequest (Object# AmazonWebServiceRequest)
   deriving Class
 
+type instance Inherits AmazonWebServiceRequest = '[Object, ReadLimitInfo]
+
 foreign import java unsafe clone :: Java AmazonWebServiceRequest AmazonWebServiceRequest
 
 foreign import java unsafe getCloneRoot :: Java AmazonWebServiceRequest AmazonWebServiceRequest
@@ -146,8 +149,6 @@ foreign import java unsafe getCustomQueryParameters :: Java AmazonWebServiceRequ
 foreign import java unsafe getCustomRequestHeaders :: Java AmazonWebServiceRequest (Map JString JString)
 
 foreign import java unsafe getGeneralProgressListener :: Java AmazonWebServiceRequest ProgressListener
-
-foreign import java unsafe getReadLimit :: Java AmazonWebServiceRequest Int
 
 foreign import java unsafe getRequestClientOptions :: Java AmazonWebServiceRequest RequestClientOptions
 
@@ -198,11 +199,11 @@ data {-# CLASS "com.amazonaws.RequestClientOptions" #-} RequestClientOptions = R
 
 foreign import java unsafe appendUserAgent :: String -> Java RequestClientOptions ()
 
-foreign import java unsafe getClientMarker :: RequestClientOptions.Marker -> Java RequestClientOptions String
+foreign import java unsafe getClientMarker :: Marker -> Java RequestClientOptions String
 
 foreign import java unsafe "getReadLimit" getReadLimitRCO :: Java RequestClientOptions Int
 
-foreign import java unsafe putClientMarker :: RequestClientOptions.Marker -> String -> Java RequestClientOptions ()
+foreign import java unsafe putClientMarker :: Marker -> String -> Java RequestClientOptions ()
 
 foreign import java unsafe setReadLimit :: Int -> Java RequestClientOptions ()
 
@@ -210,10 +211,10 @@ foreign import java unsafe setReadLimit :: Int -> Java RequestClientOptions ()
 
 -- Start com.amazonaws.RequestClientOptions.Marker
 
-data {-# CLASS "com.amazonaws.RequestClientOptions$Marker" #-} RequestClientOptionsMarker = RequestClientOptionsMarker (Object# RequestClientOptionsMarker)
+data {-# CLASS "com.amazonaws.RequestClientOptions$Marker" #-} Marker = Marker (Object# Marker)
   deriving Class
 
-foreign import java unsafe "@static @field java.math.RequestClientOptions$Marker.USER_AGENT" rcoUSER_AGENT :: RequestClientOptionsMarker
+foreign import java unsafe "@static @field java.math.RequestClientOptions$Marker.USER_AGENT" rcoUSER_AGENT :: Marker
 
 -- End com.amazonaws.RequestClientOptions.Marker
 
@@ -235,13 +236,13 @@ foreign import java unsafe getEndpointPrefix :: (b <: AmazonWebServiceClient) =>
 
 foreign import java unsafe getRequestMetricsCollector :: (b <: AmazonWebServiceClient) => Java b RequestMetricCollector
 
-foreign import java unsafe getServiceName :: (b <: AmazonWebServiceClient) => Java b String
+foreign import java unsafe "getServiceName" getServiceNameAWS :: (b <: AmazonWebServiceClient) => Java b String
 
 foreign import java unsafe getSignerByURI :: (b <: AmazonWebServiceClient) => URI -> Java b Signer
 
 foreign import java unsafe getSignerRegionOverride :: (b <: AmazonWebServiceClient) => Java b String
 
-foreign import java unsafe getTimeOffset :: (b <: AmazonWebServiceClient) => Java b Int
+foreign import java unsafe "getTimeOffset" getTimeOffsetAWS :: (b <: AmazonWebServiceClient) => Java b Int
 
 foreign import java unsafe makeImmutable :: (b <: AmazonWebServiceClient) => Java b ()
 
@@ -251,12 +252,12 @@ foreign import java unsafe setServiceNameIntern :: (b <: AmazonWebServiceClient)
 foreign import java unsafe setSignerRegionOverride :: (b <: AmazonWebServiceClient)
   => String -> Java b ()
 
-foreign import java unsafe setTimeOffset :: (b <: AmazonWebServiceClient)
+foreign import java unsafe "setTimeOffset" setTimeOffsetAWS :: (b <: AmazonWebServiceClient)
   => Int -> Java b ()
 
 foreign import java unsafe shutdown :: (b <: AmazonWebServiceClient) => Java b ()
 
-foreign import java unsafe withTimeOffset :: (b <: AmazonWebServiceClient)
+foreign import java unsafe "withTimeOffset" withTimeOffsetAWS :: (b <: AmazonWebServiceClient)
   => Int -> Java b AmazonWebServiceClient
 
 -- End com.amazonaws.AmazonWebServiceClient
@@ -316,11 +317,11 @@ foreign import java unsafe setSdkResponseMetadata :: (t <: ResponseMetadata)
 data {-# CLASS "com.amazonaws.ApacheHttClientConfig" #-} ApacheHttClientConfig = ApacheHttClientConfig (Object# ApacheHttClientConfig)
   deriving Class
 
-foreign import java unsafe getSslSocketFactory :: Java ApacheHttClientConfig ConnectionSocketFactory
-
-foreign import java unsafe setSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ()
-
-foreign import java unsafe withSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ApacheHttClientConfig
+-- foreign import java unsafe getSslSocketFactory :: Java ApacheHttClientConfig ConnectionSocketFactory
+--
+-- foreign import java unsafe setSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ()
+--
+-- foreign import java unsafe withSslSocketFactory :: ConnectionSocketFactory ->  Java ApacheHttClientConfig ApacheHttClientConfig
 
 -- End com.amazonaws.ApacheHttClientConfig
 
@@ -353,9 +354,7 @@ foreign import java unsafe getMaxConnections :: Java ClientConfiguration Int
 
 foreign import java unsafe getMaxConsecutiveRetriesBeforeThrottling :: Java ClientConfiguration Int
 
-foreign import java unsafe getMaxErrorRetry :: Java ClientConfiguration Int
-
-foreign import java unsafe getMaxErrorRetry :: Java ClientConfiguration Int
+foreign import java unsafe getMaxErrorRetryCC :: Java ClientConfiguration Int
 
 foreign import java unsafe getNonProxyHosts :: Java ClientConfiguration String
 
@@ -422,7 +421,7 @@ foreign import java unsafe setNonProxyHosts :: String -> Java ClientConfiguratio
 
 foreign import java unsafe setPreemptiveBasicProxyAuth :: Bool -> Java ClientConfiguration ()
 
-foreign import java unsafe setNonProxyHosts :: String -> Java ClientConfiguration ()
+
 
 foreign import java unsafe setProtocol :: Protocol -> Java ClientConfiguration ()
 
@@ -605,47 +604,48 @@ foreign import java unsafe getConfig :: (b <: ClientConfigurationFactory) => Jav
 
 -- Start com.amazonaws.DefaultRequest
 
-data {-# CLASS "com.amazonaws.DefaultRequest" #-} DefaultRequest t = DefaultRequest (Object# DefaultRequest t)
+data {-# CLASS "com.amazonaws.DefaultRequest" #-} DefaultRequest t = DefaultRequest (Object# (DefaultRequest t))
   deriving Class
 
 foreign import java unsafe
-  addHandlerContext :: (t <: Object, x <: Object) => HandlerContextKey -> Java DefaultRequest ()
+  "addHandlerContext" addHandlerContextHCK :: (t <: Object, x <: Object)
+  => (HandlerContextKey x) -> x -> Java (DefaultRequest t) x
 
 foreign import java unsafe "addHeader"
-  addHeaderDR :: (t <: Object) => String -> String -> Java DefaultRequest ()
+  addHeaderDR :: (t <: Object) => String -> String -> Java (DefaultRequest t) ()
 
 foreign import java unsafe "addParameter"
-  addParameterDR :: (t <: Object) => String -> String -> Java DefaultRequest ()
+  addParameterDR :: (t <: Object) => String -> String -> Java (DefaultRequest t) ()
 
 foreign import java unsafe "addParameters"
-  addParametersDR :: (t <: Object) => String -> List String -> Java DefaultRequest ()
+  addParametersDR :: (t <: Object) => String -> List String -> Java (DefaultRequest t) ()
 
 foreign import java unsafe "getAWSRequestMetrics"
-  getAWSRequestMetricsDR :: (t <: Object) => Java DefaultRequest AWSRequestMetrics
+  getAWSRequestMetricsDR :: (t <: Object) => Java (DefaultRequest t) AWSRequestMetrics
 
 foreign import java unsafe "getContent"
-  getContentDR :: (t <: Object) => Java DefaultRequest InputStream
+  getContentDR :: (t <: Object) => Java (DefaultRequest t) InputStream
 
 foreign import java unsafe "getContentUnwrapped"
-  getContentUnwrappedDR :: (t <: Object) => Java DefaultRequest InputStream
+  getContentUnwrappedDR :: (t <: Object) => Java (DefaultRequest t) InputStream
 
 foreign import java unsafe "getEndpoint"
-  getEndpointDR :: (t <: Object) => Java DefaultRequest URI
+  getEndpointDR :: (t <: Object) => Java (DefaultRequest t) URI
 
 foreign import java unsafe "getHeaders"
-  getHeadersDR :: (t <: Object) => Java DefaultRequest (Map JString JString)
+  getHeadersDR :: (t <: Object) => Java (DefaultRequest t) (Map JString JString)
 
 foreign import java unsafe "getHttpMethod"
-  getHttpMethodDR :: (t <: Object) => Java DefaultRequest HttpMethodName
+  getHttpMethodDR :: (t <: Object) => Java (DefaultRequest t) HttpMethodName
 
 foreign import java unsafe "getOriginalRequest"
-  getOriginalRequestDR :: (t <: Object) => Java DefaultRequest AmazonWebServiceRequest
+  getOriginalRequestDR :: (t <: Object) => Java (DefaultRequest t) AmazonWebServiceRequest
 
 foreign import java unsafe "getOriginalRequestObject"
-  getOriginalRequestObjectDR :: (t <: Object) => Java DefaultRequest Object
+  getOriginalRequestObjectDR :: (t <: Object) => Java (DefaultRequest t) Object
 
 foreign import java unsafe "getParameters"
-  getParametersDR :: (t <: Object) => Java DefaultRequest (Map JString (List JString))
+  getParametersDR :: (t <: Object) => Java (DefaultRequest t) (Map JString (List JString))
 
 -- End com.amazonaws.DefaultRequest
 
@@ -661,23 +661,23 @@ data {-# CLASS "com.amazonaws.PredefinedClientConfigurations" #-} PredefinedClie
 data {-# CLASS "com.amazonaws.RequestConfig" #-} RequestConfig = RequestConfig (Object# RequestConfig)
   deriving Class
 
-foreign import java unsafe getClientExecutionTimeout :: Java RequestConfig JInteger
+foreign import java unsafe "getClientExecutionTimeout" getClientExecutionTimeoutRC :: Java RequestConfig JInteger
 
 foreign import java unsafe getCredentialsProvider :: Java RequestConfig AWSCredentialsProvider
 
-foreign import java unsafe getCustomQueryParameters :: Java RequestConfig (Map JString (List JString))
+foreign import java unsafe "getCustomQueryParameters" getCustomQueryParametersRC :: Java RequestConfig (Map JString (List JString))
 
-foreign import java unsafe getCustomRequestHeaders :: Java RequestConfig (Map JString JString)
+foreign import java unsafe "getCustomRequestHeaders" getCustomRequestHeadersRC :: Java RequestConfig (Map JString JString)
 
-foreign import java unsafe getOriginalRequest :: Java RequestConfig Object
+foreign import java unsafe "getOriginalRequest" getOriginalRequestRC :: Java RequestConfig Object
 
 foreign import java unsafe getProgressListener :: Java RequestConfig ProgressListener
 
-foreign import java unsafe getRequestClientOptions :: Java RequestConfig RequestClientOptions
+foreign import java unsafe "getRequestClientOptions" getRequestClientOptionsRC :: Java RequestConfig RequestClientOptions
 
-foreign import java unsafe getRequestMetricsCollector :: Java RequestConfig RequestMetricCollector
+foreign import java unsafe "getRequestMetricsCollector" getRequestMetricsCollectorRC :: Java RequestConfig RequestMetricCollector
 
-foreign import java unsafe getRequestTimeout :: Java RequestConfig JInteger
+foreign import java unsafe "getRequestTimeout" getRequestTimeoutRC :: Java RequestConfig JInteger
 
 foreign import java unsafe getRequestType :: Java RequestConfig JString
 
@@ -700,13 +700,6 @@ data {-# CLASS "com.amazonaws.SDKGlobalConfiguration" #-} SDKGlobalConfiguration
   deriving Class
 
 -- End com.amazonaws.SDKGlobalConfiguration
-
--- Start com.amazonaws.SDKGlobalTime
-
-data {-# CLASS "com.amazonaws.SDKGlobalTime" #-} SDKGlobalTime = SDKGlobalTime (Object# SDKGlobalTime)
-  deriving Class
-
--- End com.amazonaws.SDKGlobalTime
 
 -- Start com.amazonaws.SystemDefaultDnsResolver
 
@@ -755,3 +748,373 @@ foreign import java unsafe "@static @field com.amazonaws.HttpMethod.PUT"
   httpMethodPUT :: HttpMethod
 
 -- End com.amazonaws.HttpMethod
+
+-- Start com.amazonaws.SDKGlobalTime
+
+data {-# CLASS "com.amazonaws.SDKGlobalTime" #-} SDKGlobalTime = SDKGlobalTime (Object# SDKGlobalTime)
+  deriving Class
+
+-- End com.amazonaws.SDKGlobalTime
+
+-- Start com.amazonaws.http.HttpMethodName
+
+data {-# CLASS "com.amazonaws.http.HttpMethodName" #-} HttpMethodName = HttpMethodName (Object# HttpMethodName)
+  deriving Class
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.DELETE"
+  hmnDELETE :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.GET"
+  hmnGET :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.HEAD"
+  hmnHEAD :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.OPTIONS"
+  hmnOPTIONS :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PATCH"
+  hmnPATCH :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.POST"
+  hmnPOST :: HttpMethodName
+
+foreign import java unsafe "@static @field com.amazonaws.http.HttpMethodName.PUT"
+  hmnPUT :: HttpMethodName
+
+-- End com.amazonaws.http.HttpMethodName
+
+-- Start com.amazonaws.http.SdkHttpMetadata
+
+data {-# CLASS "com.amazonaws.http.SdkHttpMetadata" #-} SdkHttpMetadata = SdkHttpMetadata (Object# SdkHttpMetadata)
+  deriving Class
+
+foreign import java unsafe getHttpHeaders :: Java SdkHttpMetadata (Map JString JString)
+
+foreign import java unsafe getHttpStatusCode :: Java SdkHttpMetadata Int
+
+-- End com.amazonaws.http.SdkHttpMetadata
+
+-- Start com.amazonaws.auth.AWSCredentials
+
+data {-# CLASS "com.amazonaws.auth.AWSCredentials" #-} AWSCredentials = AWSCredentials (Object# AWSCredentials)
+  deriving Class
+
+foreign import java unsafe "@interface getAWSAccessKeyId"
+  getAWSAccessKeyId :: Java AWSCredentials String
+
+-- foreign import java unsafe "@interface getAWSSecretKey"
+--   getAWSAccessKeyId :: Java AWSCredentials String
+
+-- End com.amazonaws.auth.AWSCredentials
+
+-- Start com.amazonaws.auth.AWSCredentialsProvider
+
+data {-# CLASS "com.amazonaws.auth.AWSCredentialsProvider" #-} AWSCredentialsProvider = AWSCredentialsProvider (Object# AWSCredentialsProvider)
+  deriving Class
+
+foreign import java unsafe "@interface getCredentials"
+  getCredentials :: Java AWSCredentialsProvider AWSCredentials
+
+foreign import java unsafe "@interface refresh"
+  refresh :: Java AWSCredentialsProvider ()
+
+-- End com.amazonaws.auth.AWSCredentialsProvider
+
+-- Start com.amazonaws.auth.Signer
+
+data {-# CLASS "com.amazonaws.auth.Signer" #-} Signer = Signer (Object# Signer)
+  deriving Class
+
+-- End com.amazonaws.auth.Signer
+-- Start com.amazonaws.event.ProgressListener
+
+data {-# CLASS "com.amazonaws.ProgressListener" #-} ProgressListener = ProgressListener (Object# ProgressListener)
+  deriving Class
+
+foreign import java unsafe "@interface progressChanged" progressChanged :: Java ProgressListener ()
+
+-- End com.amazonaws.event.ProgressListener
+
+-- Start com.amazonaws.event.ProgressEvent
+
+data {-# CLASS "com.amazonaws.ProgressEvent" #-} ProgressEvent = ProgressEvent (Object# ProgressEvent)
+  deriving Class
+
+foreign import java unsafe getBytes :: Java ProgressEvent Int64
+
+foreign import java unsafe getBytesTransferred :: Java ProgressEvent Int64
+
+foreign import java unsafe getEventType :: Java ProgressEvent ProgressEventType
+
+-- End com.amazonaws.event.ProgressEvent
+
+-- Start com.amazonaws.event.ProgressEventType
+
+data {-# CLASS "com.amazonaws.ProgressEventType" #-} ProgressEventType = ProgressEventType (Object# ProgressEventType)
+  deriving Class
+
+-- End com.amazonaws.event.ProgressEventType
+-- Start com.amazonaws.handlers.HandlerContextKey
+
+data {-# CLASS "com.amazonaws.handlers.HandlerContextKey" #-} HandlerContextKey t = HandlerContextKey (Object# (HandlerContextKey t))
+  deriving Class
+
+-- End com.amazonaws.handlers.HandlerContextKey
+
+-- Start com.amazonaws.handlers.RequestHandler
+
+data {-# CLASS "com.amazonaws.handlers.RequestHandler" #-} RequestHandler = RequestHandler (Object# RequestHandler)
+  deriving Class
+
+foreign import java unsafe "@interface afterError"
+  afterError :: Request b -> Exception -> Java RequestHandler ()
+
+foreign import java unsafe "@interface afterResponse"
+  afterResponse :: Request b -> Object -> TimingInfo -> Java RequestHandler ()
+
+foreign import java unsafe "@interface beforeRequest"
+  beforeRequest :: Request b -> Java RequestHandler ()
+
+-- End com.amazonaws.handlers.RequestHandler
+
+-- Start com.amazonaws.handlers.RequestHandler2
+
+data {-# CLASS "com.amazonaws.handlers.RequestHandler2" #-} RequestHandler2 = RequestHandler2 (Object# RequestHandler2)
+  deriving Class
+
+-- End com.amazonaws.handlers.RequestHandler2
+
+-- Start com.amazonaws.metric.RequestMetricCollector
+
+data {-# CLASS "com.amazonaws.metric.RequestMetricCollector" #-} RequestMetricCollector = RequestMetricCollector (Object# RequestMetricCollector)
+  deriving Class
+
+foreign import java unsafe collectMetrics :: Java RequestMetricCollector ()
+
+foreign import java unsafe isEnabled :: Java RequestMetricCollector Bool
+
+-- End com.amazonaws.metric.RequestMetricCollector
+
+-- Start com.amazonaws.metric.MetricType
+
+data {-# CLASS "com.amazonaws.metric.MetricType" #-} MetricType = MetricType (Object# MetricType)
+  deriving Class
+
+foreign import java unsafe "@interface name" name :: (b <: MetricType) => Java MetricType String
+
+-- End com.amazonaws.metric.MetricType
+-- Start com.amazonaws.regions.Regions
+
+data {-# CLASS "com.amazonaws.regions.Regions" #-} Regions = Regions (Object# Regions)
+  deriving Class
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.AP_NORTHEAST_1"
+  rgAP_NORTHEAST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.AP_NORTHEAST_2"
+  rgAP_NORTHEAST_2 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.AP_SOUTH_1"
+  rgAP_SOUTH_1  :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.AP_SOUTHEAST_1"
+  rgAP_SOUTHEAST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.AP_SOUTHEAST_2"
+  rgAP_SOUTHEAST_2 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.CA_CENTRAL_1"
+  rgCA_CENTRAL_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.CN_NORTH_1"
+  rgCN_NORTH_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.EU_CENTRAL_1"
+  rgEU_CENTRAL_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.EU_WEST_1"
+  rgEU_WEST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.EU_WEST_2"
+  rgEU_WEST_2 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.GovCloud"
+  rgGovCloud :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.SA_EAST_1"
+  rgSA_EAST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.US_EAST_1"
+  rgUS_EAST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.US_EAST_2"
+  rgUS_EAST_2 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.US_WEST_1"
+  rgUS_WEST_1 :: Regions
+
+foreign import java unsafe "@static @field com.amazonaws.regions.Regions.US_WEST_2"
+  rgUS_WEST_2 :: Regions
+
+-- End com.amazonaws.regions.Regions
+-- Start com.amazonaws.retry.RetryPolicy
+
+data {-# CLASS "com.amazonaws.retry.RetryPolicy" #-} RetryPolicy = RetryPolicy (Object# RetryPolicy)
+  deriving Class
+
+foreign import java unsafe getBackoffStrategy :: Java RetryPolicy BackoffStrategy
+
+foreign import java unsafe getMaxErrorRetry :: Java RetryPolicy Int
+
+foreign import java unsafe getRetryCondition :: Java RetryPolicy RetryCondition
+
+foreign import java unsafe isMaxErrorRetryInClientConfigHonored :: Java RetryPolicy Bool
+
+-- End com.amazonaws.retry.RetryPolicy
+
+-- Start com.amazonaws.retry.RetryPolicy.BackoffStrategy
+
+data {-# CLASS "com.amazonaws.retry.RetryPolicy$BackoffStrategy" #-} BackoffStrategy = BackoffStrategy (Object# BackoffStrategy)
+  deriving Class
+
+--foreign import java unsafe "@interface"
+--  delayBeforeNextRetry :: AmazonWebServiceRequest -> AmazonClientException -> Java BackoffStrategy Int64
+
+-- End com.amazonaws.retry.RetryPolicy.BackoffStrategy
+
+-- Start com.amazonaws.retry.RetryPolicy.RetryCondition
+
+data {-# CLASS "com.amazonaws.retry.RetryPolicy$RetryCondition" #-} RetryCondition = RetryCondition (Object# RetryCondition)
+  deriving Class
+
+--foreign import java unsafe "@interface"
+--  shouldRetry :: AmazonWebServiceRequest -> AmazonClientException -> Java RetryCondition Bool
+
+-- End com.amazonaws.retry.RetryPolicy.RetryCondition
+-- Start com.amazonaws.util.AWSRequestMetrics
+
+data {-# CLASS "com.amazonaws.util.AWSRequestMetrics" #-} AWSRequestMetrics = AWSRequestMetrics (Object# AWSRequestMetrics)
+  deriving Class
+
+foreign import java unsafe addProperty :: (b <:AWSRequestMetrics )
+  => MetricType -> Object -> Java b ()
+
+foreign import java unsafe "addProperty" addProperty2 :: (b <:AWSRequestMetrics )
+  => String -> Object -> Java b ()
+
+foreign import java unsafe addPropertyWith :: (b <:AWSRequestMetrics )
+  => MetricType -> Object -> Java b AWSRequestMetrics
+
+foreign import java unsafe "addPropertyWith" addPropertyWith2 :: (b <:AWSRequestMetrics )
+  => String -> Object -> Java b AWSRequestMetrics
+
+foreign import java unsafe endEvent :: (b <:AWSRequestMetrics )
+  => MetricType -> Java b ()
+
+foreign import java unsafe "endEvent" endEvent2 :: (b <:AWSRequestMetrics )
+  => String -> Java b ()
+
+foreign import java unsafe getProperty :: (b <:AWSRequestMetrics )
+  => MetricType -> Java b (List Object)
+
+foreign import java unsafe "getProperty" getProperty2 :: (b <:AWSRequestMetrics )
+  => String -> Java b (List Object)
+
+foreign import java unsafe getTimingInfo :: (b <:AWSRequestMetrics ) => Java b TimingInfo
+
+foreign import java unsafe incrementCounter :: (b <:AWSRequestMetrics )
+  => MetricType -> Java b ()
+
+foreign import java unsafe "incrementCounter" incrementCounter2 :: (b <:AWSRequestMetrics )
+  => String -> Java b ()
+
+foreign import java unsafe incrementCounterWith :: (b <:AWSRequestMetrics )
+  => MetricType -> Java b ()
+
+foreign import java unsafe "incrementCounterWith" incrementCounterWith2 :: (b <:AWSRequestMetrics )
+  => String -> Java b ()
+
+foreign import java unsafe isEnabledAWSMetrics :: (b <:AWSRequestMetrics ) => Java b Bool
+
+foreign import java unsafe log :: (b <:AWSRequestMetrics ) => Java b ()
+
+foreign import java unsafe setCounter :: (b <:AWSRequestMetrics ) => MetricType -> Int64 -> Java b Bool
+
+foreign import java unsafe "setCounter" setCounter2 :: (b <:AWSRequestMetrics ) => String -> Int64 -> Java b Bool
+
+foreign import java unsafe startEvent :: (b <:AWSRequestMetrics ) => MetricType -> Java b Bool
+
+foreign import java unsafe "startEvent" startEvent2 :: (b <:AWSRequestMetrics ) => String -> Java b Bool
+
+foreign import java unsafe withCounter :: (b <:AWSRequestMetrics ) => MetricType -> Int64 -> Java b AWSRequestMetrics
+
+foreign import java unsafe "withCounter" withCounter2 :: (b <:AWSRequestMetrics ) => String -> Int64 -> Java b AWSRequestMetrics
+
+-- Start com.amazonaws.util.TimingInfo
+
+data {-# CLASS "com.amazonaws.util.TimingInfo" #-} TimingInfo = TimingInfo (Object# TimingInfo)
+  deriving Class
+
+foreign import java unsafe addSubMeasurement :: String -> TimingInfo -> Java TimingInfo ()
+
+foreign import java unsafe endTiming :: Java TimingInfo TimingInfo
+
+foreign import java unsafe getAllCounters :: Java TimingInfo (Map JString JNumber)
+
+foreign import java unsafe getAllSubMeasurements :: String -> Java TimingInfo (List TimingInfo)
+
+foreign import java unsafe getCounters :: String -> Java TimingInfo JNumber
+
+foreign import java unsafe getElapsedTimeMillis :: Java TimingInfo Int64
+
+foreign import java unsafe getEndEpochTimeMilli :: Java TimingInfo Int64
+
+foreign import java unsafe getEndEpochTimeMilliIfKnown :: Java TimingInfo JLong
+
+foreign import java unsafe getEndTime :: Java TimingInfo Int64
+
+foreign import java unsafe getEndTimeNano :: Java TimingInfo Int64
+
+foreign import java unsafe getEndTimeNanoIfKnown :: Java TimingInfo JLong
+
+foreign import java unsafe getLastSubMeasurement :: String -> Java TimingInfo TimingInfo
+
+foreign import java unsafe getStartEpochTimeMilli :: Java TimingInfo Int64
+
+foreign import java unsafe getStartEpochTimeMilliIfKnown :: Java TimingInfo JLong
+
+foreign import java unsafe getStartTime :: Java TimingInfo Int64
+
+foreign import java unsafe getStartTimeNano :: Java TimingInfo Int64
+
+foreign import java unsafe getSubMeasurement :: String -> Java TimingInfo TimingInfo
+
+foreign import java unsafe "getSubMeasurement" getSubMeasurement2 :: String -> Int -> Java TimingInfo TimingInfo
+
+foreign import java unsafe getSubMeasurementsByName :: Java TimingInfo (Map JString (List TimingInfo))
+
+foreign import java unsafe getTimeTakenMillis :: Java TimingInfo Double
+
+foreign import java unsafe getTimeTakenMillisIfKnown :: Java TimingInfo JDouble
+
+foreign import java unsafe "incrementCounter" incrementCounterTI :: String -> Java TimingInfo ()
+
+foreign import java unsafe isEndTimeKnown :: Java TimingInfo Bool
+
+foreign import java unsafe isStartEpochTimeMilliKnown :: Java TimingInfo Bool
+
+foreign import java unsafe "setCounter" setCounterTI :: String -> Int64 -> Java TimingInfo ()
+
+foreign import java unsafe setEndTime :: Int64 -> Java TimingInfo ()
+
+foreign import java unsafe setEndTimeNano :: Int64 -> Java TimingInfo ()
+
+-- End com.amazonaws.util.TimingInfo
+
+-- Start com.amazonaws.http.HttpResponse
+
+data {-# CLASS "com.amazonaws.http.HttpResponse" #-} HttpResponse = HttpResponse (Object# HttpResponse)
+  deriving Class
+
+-- End com.amazonaws.http.HttpResponse
