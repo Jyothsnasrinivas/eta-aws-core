@@ -707,3 +707,26 @@ data {-# CLASS "com.amazonaws.SDKGlobalTime" #-} SDKGlobalTime = SDKGlobalTime (
   deriving Class
 
 -- End com.amazonaws.SDKGlobalTime
+
+-- Start com.amazonaws.SystemDefaultDnsResolver
+
+data {-# CLASS "com.amazonaws.SystemDefaultDnsResolver" #-} SystemDefaultDnsResolver = SystemDefaultDnsResolver (Object# SystemDefaultDnsResolver)
+  deriving Class
+
+-- End com.amazonaws.SystemDefaultDnsResolver
+
+-- Start com.amazonaws.AmazonServiceException.ErrorType
+
+data {-# CLASS "com.amazonaws.AmazonServiceException$ErrorType" #-} ErrorType = ErrorType (Object# ErrorType)
+  deriving Class
+
+foreign import java unsafe "@static @field com.amazonaws.AmazonServiceException$ErrorType.Client"
+  errorTypeClient :: ErrorType
+
+foreign import java unsafe "@static @field com.amazonaws.AmazonServiceException$ErrorType.Service"
+  errorTypeService :: ErrorType
+
+foreign import java unsafe "@static @field com.amazonaws.AmazonServiceException$ErrorType.Unknown"
+  errorTypeUnknown :: ErrorType
+
+-- End com.amazonaws.AmazonServiceException.ErrorType
