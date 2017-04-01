@@ -730,3 +730,28 @@ foreign import java unsafe "@static @field com.amazonaws.AmazonServiceException$
   errorTypeUnknown :: ErrorType
 
 -- End com.amazonaws.AmazonServiceException.ErrorType
+
+-- Start com.amazonaws.HttpMethod
+
+data {-# CLASS "com.amazonaws.HttpMethod" #-} HttpMethod = HttpMethod (Object# HttpMethod)
+  deriving Class
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.DELETE"
+  httpMethodDELETE :: HttpMethod
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.GET"
+  httpMethodGET :: HttpMethod
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.HEAD"
+  httpMethodHEAD :: HttpMethod
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.PATCH"
+  httpMethodPATCH :: HttpMethod
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.POST"
+  httpMethodPOST :: HttpMethod
+
+foreign import java unsafe "@static @field com.amazonaws.HttpMethod.PUT"
+  httpMethodPUT :: HttpMethod
+
+-- End com.amazonaws.HttpMethod
