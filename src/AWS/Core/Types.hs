@@ -2,9 +2,11 @@
 module AWS.Core.Types where
 
 import Java
+import Java.Concurrent
 import Java.IO
 import Java.Net
 import Java.Security
+import Java.Utils
 
 -- Start com.amazonaws.DnsResolver
 
@@ -1135,3 +1137,49 @@ data {-# CLASS "com.amazonaws.http.HttpResponse" #-} HttpResponse = HttpResponse
   deriving Class
 
 -- End com.amazonaws.http.HttpResponse
+
+-- Start com.amazonaws.waiters.Waiter
+
+data {-# CLASS "com.amazonaws.handlers.Waiter" #-} Waiter input = Waiter (Object# (Waiter input))
+  deriving Class
+
+foreign import java unsafe "@interface run"
+ run :: (input <: AmazonWebServiceRequest, b <: (Waiter input)) => WaiterParameters input -> Java b ()
+
+foreign import java unsafe "@interface runAsync"
+  runAsync :: (input <: AmazonWebServiceRequest, b <: (Waiter input))
+  => WaiterParameters input -> WaiterHandler AmazonWebServiceRequest -> Java b (Future Void)
+
+-- End com.amazonaws.waiters.Waiter
+
+-- Start com.amazonaws.waiters.WaiterParameters
+
+data {-# CLASS "com.amazonaws.handlers.WaiterParameters" #-} WaiterParameters input = WaiterParameters (Object# (WaiterParameters input))
+  deriving Class
+
+foreign import java unsafe "@interface getPollingStrategy"
+ getPollingStrategy :: (input <: AmazonWebServiceRequest) => Java (WaiterParameters input) PollingStrategy
+
+foreign import java unsafe getRequest :: (input <: AmazonWebServiceRequest) => Java (WaiterParameters input) input
+
+foreign import java unsafe withPollingStrategy :: (input <: AmazonWebServiceRequest)
+ => PollingStrategy -> Java (WaiterParameters input) (WaiterParameters input)
+
+foreign import java unsafe withRequest :: (input <: AmazonWebServiceRequest)
+ => input -> Java (WaiterParameters input) (WaiterParameters input)
+
+-- End com.amazonaws.waiters.WaiterParameters
+
+-- Start com.amazonaws.waiters.PollingStrategy
+
+data {-# CLASS "com.amazonaws.handlers.PollingStrategy" #-} PollingStrategy = PollingStrategy (Object# PollingStrategy)
+  deriving Class
+
+-- End com.amazonaws.waiters.PollingStrategy
+
+-- Start com.amazonaws.waiters.WaiterHandler
+
+data {-# CLASS "com.amazonaws.handlers.WaiterHandler" #-} WaiterHandler input = WaiterHandler (Object# (WaiterHandler input))
+  deriving Class
+
+-- End com.amazonaws.waiters.WaiterHandler
