@@ -14,7 +14,8 @@ library
   build-depends:       base >=4.8 && <4.9
   hs-source-dirs:      src
   default-language:    Haskell2010
-  exposed-modules:     AWS.Core.Types
+  exposed-modules:     AWS.Core
+                       AWS.Core.Types
 
   default-extensions:  TypeOperators
                        MagicHash
