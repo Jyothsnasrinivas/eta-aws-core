@@ -700,3 +700,10 @@ data {-# CLASS "com.amazonaws.SDKGlobalConfiguration" #-} SDKGlobalConfiguration
   deriving Class
 
 -- End com.amazonaws.SDKGlobalConfiguration
+
+-- Start com.amazonaws.SDKGlobalTime
+
+data {-# CLASS "com.amazonaws.SDKGlobalTime" #-} SDKGlobalTime = SDKGlobalTime (Object# SDKGlobalTime)
+  deriving Class
+
+-- End com.amazonaws.SDKGlobalTime
