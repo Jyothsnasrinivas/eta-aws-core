@@ -593,6 +593,23 @@ foreign import java unsafe "@static @field com.amazonaws.Protocol.HTTPS" mkHTTPS
 
 -- End com.amazonaws.Protocol
 
+-- Start com.amazonaws.protocol.ProtocolMarshaller
+
+data {-# CLASS "com.amazonaws.protocol.ProtocolMarshaller" #-} ProtocolMarshaller = ProtocolMarshaller (Object# ProtocolMarshaller)
+  deriving Class
+
+foreign import java unsafe "@interface marshall"
+  marshall :: (t <: Object, b <: ProtocolMarshaller) => t -> MarshallingInfo t -> Java b t
+
+-- End com.amazonaws.protocol.ProtocolMarshaller
+
+-- Start com.amazonaws.protocol.MarshallingInfo
+
+data {-# CLASS "com.amazonaws.protocol.MarshallingInfo" #-} MarshallingInfo t = MarshallingInfo (Object# (MarshallingInfo t))
+  deriving Class
+
+-- End com.amazonaws.protocol.ProtocolMarshaller
+
 -- Start com.amazonaws.ClientConfigurationFactory
 
 data {-# CLASS "com.amazonaws.ClientConfigurationFactory" #-} ClientConfigurationFactory = ClientConfigurationFactory (Object# ClientConfigurationFactory)
