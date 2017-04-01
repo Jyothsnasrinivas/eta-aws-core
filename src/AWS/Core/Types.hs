@@ -682,3 +682,21 @@ foreign import java unsafe getRequestTimeout :: Java RequestConfig JInteger
 foreign import java unsafe getRequestType :: Java RequestConfig JString
 
 -- End com.amazonaws.RequestConfig
+
+-- Start com.amazonaws.Response
+
+data {-# CLASS "com.amazonaws.Response" #-} Response t = Response (Object# (Response t))
+  deriving Class
+
+foreign import java unsafe getAwsResponse :: (t <: Object) => Java (Response t) t
+
+foreign import java unsafe getHttpResponse :: (t <: Object) => Java (Response t) HttpResponse
+
+-- End com.amazonaws.Response
+
+-- Start com.amazonaws.SDKGlobalConfiguration
+
+data {-# CLASS "com.amazonaws.SDKGlobalConfiguration" #-} SDKGlobalConfiguration = SDKGlobalConfiguration (Object# SDKGlobalConfiguration)
+  deriving Class
+
+-- End com.amazonaws.SDKGlobalConfiguration
