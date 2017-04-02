@@ -2,11 +2,17 @@
 module AWS.Core.Types where
 
 import Java
+import Java.Array
 import Java.Concurrent
 import Java.IO
 import Java.Net
 import Java.Security
 import Java.Utils
+
+data {-# CLASS "com.amazonaws.handlers.RequestHandler2[]" #-} RequestHandler2Array = RequestHandler2Array (Object# RequestHandler2Array)
+  deriving Class
+
+instance JArray RequestHandler2 RequestHandler2Array
 
 -- Start com.amazonaws.DnsResolver
 
@@ -1226,3 +1232,97 @@ foreign import java unsafe hasHttpsEndpoint :: String -> Java Region Bool
 foreign import java unsafe isServiceSupported :: String -> Java Region Bool
 
 -- End com.amazonaws.regions.Region
+
+-- Start com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder
+
+data {-# CLASS "com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder" #-} AwsClientBuilder subclass typetobuild = AwsClientBuilder (Object# (AwsClientBuilder subclass typetobuild))
+  deriving Class
+
+foreign import java unsafe build
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass typetobuild
+
+foreign import java unsafe getClientConfiguration
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass ClientConfiguration
+
+foreign import java unsafe "getCredentials" getCredentialsACB
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass AWSCredentialsProvider
+
+foreign import java unsafe getEndpoint
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass EndpointConfiguration
+
+foreign import java unsafe getMetricCollector
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass RequestMetricCollector
+
+foreign import java unsafe getRegion
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass String
+
+foreign import java unsafe getRequestHandlers
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass (List RequestHandler2)
+
+foreign import java unsafe setClientConfiguration
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => ClientConfiguration -> Java subclass ()
+
+foreign import java unsafe setCredentials
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => AWSCredentialsProvider -> Java subclass ()
+
+foreign import java unsafe setEndpoint
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => EndpointConfiguration -> Java subclass ()
+
+foreign import java unsafe setMetricCollector
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => RequestMetricCollector -> Java subclass ()
+
+foreign import java unsafe setRegion
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => String -> Java subclass ()
+
+foreign import java unsafe setRequestHandlers
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => RequestHandler2Array -> Java subclass ()
+
+foreign import java unsafe withClientConfiguration
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => ClientConfiguration -> Java subclass subclass
+
+foreign import java unsafe withCredentials
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => AWSCredentialsProvider -> Java subclass subclass
+
+foreign import java unsafe withEndpoint
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => EndpointConfiguration -> Java subclass subclass
+
+foreign import java unsafe withMetricCollector
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => RequestMetricCollector -> Java subclass subclass
+
+foreign import java unsafe withRegion
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => String -> Java subclass subclass
+
+foreign import java unsafe withRequestHandlers
+  :: (subclass <: AwsClientBuilder subclass typetobuild, typetobuild <: Object)
+  => RequestHandler2Array -> Java subclass subclass
+
+-- End com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder
+
+-- Start com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
+
+data {-# CLASS "com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder$EndpointConfiguration" #-} EndpointConfiguration = EndpointConfiguration (Object# EndpointConfiguration)
+  deriving Class
+
+foreign import java unsafe "getServiceEndpoint" getServiceEndpointEC :: Java EndpointConfiguration String
+
+foreign import java unsafe getSigningRegion :: Java EndpointConfiguration String
+
+-- End com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
