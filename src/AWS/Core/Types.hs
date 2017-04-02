@@ -1183,3 +1183,18 @@ data {-# CLASS "com.amazonaws.handlers.WaiterHandler" #-} WaiterHandler input = 
   deriving Class
 
 -- End com.amazonaws.waiters.WaiterHandler
+
+-- Start com.amazonaws.handers.AsyncHandler
+
+data {-# CLASS "com.amazonaws.handers.AsyncHandler" #-} AsyncHandler request result = AsyncHandler (Object# (AsyncHandler request result))
+  deriving Class
+
+foreign import java unsafe "@interface onError"
+  onError :: (request <: AmazonWebServiceRequest, result <: Object, b <: (AsyncHandler request result))
+  => Exception -> Java b ()
+
+foreign import java unsafe "@interface onSuccess"
+  onSuccess :: (request <: AmazonWebServiceRequest, result <: Object, b <: (AsyncHandler request result))
+  => request -> result -> Java b ()
+
+-- End com.amazonaws.handers.AsyncHandler
