@@ -1326,3 +1326,16 @@ foreign import java unsafe "getServiceEndpoint" getServiceEndpointEC :: Java End
 foreign import java unsafe getSigningRegion :: Java EndpointConfiguration String
 
 -- End com.amazonaws.com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
+
+-- Start com.amazonaws.com.amazonaws.client.builder.AwsSyncClientBuilder
+
+data {-# CLASS "com.amazonaws.com.amazonaws.client.builder.AwsSyncClientBuilder" #-} AwsSyncClientBuilder subclass typetobuild = AwsSyncClientBuilder (Object# (AwsSyncClientBuilder subclass typetobuild))
+  deriving Class
+
+type instance Inherits (AwsSyncClientBuilder subclass typetobuild) = '[AwsClientBuilder subclass typetobuild]
+
+foreign import java unsafe "build" buildACBuilder
+  :: (subclass <: AwsSyncClientBuilder subclass typetobuild, typetobuild <: Object)
+  => Java subclass typetobuild
+
+-- End com.amazonaws.com.amazonaws.client.builder.AwsSyncClientBuilder
