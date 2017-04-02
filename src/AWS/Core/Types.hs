@@ -923,6 +923,7 @@ data {-# CLASS "com.amazonaws.metric.MetricType" #-} MetricType = MetricType (Ob
 foreign import java unsafe "@interface name" name :: (b <: MetricType) => Java MetricType String
 
 -- End com.amazonaws.metric.MetricType
+
 -- Start com.amazonaws.regions.Regions
 
 data {-# CLASS "com.amazonaws.regions.Regions" #-} Regions = Regions (Object# Regions)
@@ -977,6 +978,7 @@ foreign import java unsafe "@static @field com.amazonaws.regions.Regions.US_WEST
   rgUS_WEST_2 :: Regions
 
 -- End com.amazonaws.regions.Regions
+
 -- Start com.amazonaws.retry.RetryPolicy
 
 data {-# CLASS "com.amazonaws.retry.RetryPolicy" #-} RetryPolicy = RetryPolicy (Object# RetryPolicy)
@@ -1198,3 +1200,29 @@ foreign import java unsafe "@interface onSuccess"
   => request -> result -> Java b ()
 
 -- End com.amazonaws.handers.AsyncHandler
+
+-- Start com.amazonaws.regions.Region
+
+data {-# CLASS "com.amazonaws.regions.Region" #-} Region = Region (Object# Region)
+  deriving Class
+
+foreign import java unsafe createClient :: (t <: AmazonWebServiceClient)
+  => JClass t -> AWSCredentialsProvider -> ClientConfiguration -> Java Region t
+
+foreign import java unsafe getAvailableEndpoints :: Java Region (Collection JString)
+
+foreign import java unsafe getDomain :: Java Region String
+
+foreign import java unsafe getName :: Java Region String
+
+foreign import java unsafe getPartition :: Java Region String
+
+foreign import java unsafe getServiceEndpoint :: String -> Java Region String
+
+foreign import java unsafe hasHttpEndpoint :: String -> Java Region Bool
+
+foreign import java unsafe hasHttpsEndpoint :: String -> Java Region Bool
+
+foreign import java unsafe isServiceSupported :: String -> Java Region Bool
+
+-- End com.amazonaws.regions.Region
